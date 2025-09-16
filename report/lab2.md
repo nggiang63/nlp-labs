@@ -21,7 +21,7 @@
 
 ## 2. Kết quả chạy code
 
-### 2.1. Ví dụ corpus
+### Ví dụ corpus
 Corpus:
 ```python
 ["I love NLP.", "I love programming.", "NLP is a subfield of AI."]
@@ -45,5 +45,4 @@ Corpus:
 - Vocabulary: tập hợp tất cả token duy nhất xuất hiện trong corpus/dataset.  
 - Document-term matrix: mỗi hàng là một văn bản, mỗi cột là một token, giá trị là số lần xuất hiện.  
 - **CountVectorizer** biến đổi văn bản thành vector số => đầu vào cho mô hình ML (Naive Bayes, Logistic Regression, SVM…).  
-;; - Tokenizer khác nhau (Simple vs Regex) sẽ dẫn đến vocabulary và ma trận khác nhau (RegexTokenizer tạo nhiều token chi tiết hơn).  
 - **Khó khăn**: corpus lớn => vocabulary lớn, cần xử lý ma trận thưa để tiết kiệm bộ nhớ.  

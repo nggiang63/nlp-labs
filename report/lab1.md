@@ -21,7 +21,6 @@
 - Dùng regex `\w+|[^\w\s]` để tách token, robust hơn.  
 
 ### 1.4. Evaluation  
-- File: `labs/lab1_tokenization.py`  
 - Test với 3 câu:  
   - `"Hello, world! This is a test."`  
   - `"NLP is fascinating... isn't it?"`  
@@ -58,5 +57,5 @@
 - **SimpleTokenizer**: đơn giản, dễ dùng, nhưng giữ nguyên từ dính dấu câu (`"al-ani,"`, `"isn't"`).  
 - **RegexTokenizer**: tách chi tiết hơn, đặc biệt với ký tự `'` và `-`, giúp xử lý tốt hơn cho các tác vụ NLP cần token chính xác.  
 - So sánh cho thấy lựa chọn tokenizer ảnh hưởng trực tiếp đến số lượng và chất lượng token.  
-- **Khó khăn**: RegexTokenizer đôi khi tách quá chi tiết (ví dụ `"isn't"` => `['isn', "'", 't']`), cần cân nhắc khi dùng cho downstream tasks.  
+- **Khó khăn**: RegexTokenizer đôi khi tách quá chi tiết (ví dụ `"isn't"` => `['isn', "'", 't']`).  
 - Bài học: Tokenization là bước tiền xử lý quan trọng, ảnh hưởng đến mọi bước tiếp theo trong pipeline NLP (Vectorization, Embedding, Model Training).  
