@@ -3,30 +3,21 @@
 ```
 nlp-labs/
 │
-├── data/                     # dữ liệu gốc (UD_English-EWT, ...)
+├── data/                     
 │
-├── src/                      # source code chính (package "src")
-│   ├── core/                 # interface, loader, utils
-│   │   ├── interfaces.py
-│   │   └── dataset_loaders.py
-│   │
-│   ├── preprocessing/        # các bước tiền xử lý
-│   │   ├── __init__.py
-│   │   ├── simple_tokenizer.py
-│   │   └── regex_tokenizer.py
-│   │
-│   └── representations/      # cho Lab 2 CountVectorizer
-│       └── count_vectorizer.py
+├── src/                      
+│   ├── core/                
+│   │   └── ....py
+│   ├── preprocessing/        
+│   └── ...    
 │
-├── labs/                     # các script chạy theo từng lab
-│   ├── lab1_tokenization.py
-│   ├── lab2_count_vectorization.py
+├── labs/                     
+│   ├── lab1.py
 │   └── ...
 │
-├── tests/                    # unit test (pytest, optional)
-│   └── test_tokenizer.py
+├── report/                    
+│   └── lab1.md
 │
-├── venv/                     # virtual env
 ├── requirements.txt
 ├── README.md
 └── .gitignore
