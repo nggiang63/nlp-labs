@@ -5,6 +5,10 @@ nlp-labs/
 │
 ├── data/             # Dữ liệu        
 │
+├── report/           # Báo cáo chi tiết từng lab         
+│   ├── lab1.md
+│   └── ...
+│
 ├── src/                      
 │   ├── core/                
 │   ├── preprocessing/        
@@ -12,10 +16,6 @@ nlp-labs/
 │
 ├── test/             # Test từng lab          
 │   ├── lab1.py
-│   └── ...
-│
-├── report/           # Báo cáo chi tiết từng lab         
-│   ├── lab1.md
 │   └── ...
 │
 ├── requirements.txt
