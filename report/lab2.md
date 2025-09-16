@@ -1,38 +1,49 @@
 # Lab 2: Count Vectorization
-**Giang Nguyen Thi**  
+**Giang Nguyen Thi - 22001254**  
 2025-09-16  
 
-## Objective
-Biểu diễn văn bản thành vector số bằng mô hình **Bag-of-Words**, sử dụng lớp `CountVectorizer`.  
+## 1. Mô tả công việc
+- Cài đặt interface `Vectorizer` trong `src/core/interfaces.py` với 3 phương thức:
+  ```python
+  fit(self, corpus: list[str])
+  transform(self, documents: list[str]) -> list[list[int]]
+  fit_transform(self, corpus: list[str]) -> list[list[int]]
+  ```
+- Xây dựng **CountVectorizer** (`src/representations/count_vectorizer.py`):
+  - Nhận một tokenizer từ Lab 1.
+  - Học **vocabulary** từ corpus.
+  - Biến đổi corpus thành **document-term matrix**.
+- Tạo script demo (`labs/lab2_vectorization.py`) để thử nghiệm:
+  - Với corpus mẫu (3 câu ngắn).
+  - Với dataset **UD_English-EWT**.
 
-## Tasks
-1. **Vectorizer Interface**  
-   - Trong `src/core/interfaces.py`, định nghĩa abstract class `Vectorizer` với các phương thức:
-     - `fit(self, corpus: list[str])`
-     - `transform(self, documents: list[str]) -> list[list[int]]`
-     - `fit_transform(self, corpus: list[str]) -> list[list[int]]`
+---
 
-2. **CountVectorizer**  
-   - File: `src/representations/count_vectorizer.py`  
-   - Inherit từ `Vectorizer`  
-   - `__init__(self, tokenizer: Tokenizer)` nhận 1 tokenizer (Lab 1)  
-   - Có thuộc tính `vocabulary_` (dict[str, int])  
-   - `fit`: xây vocabulary từ corpus  
-   - `transform`: chuyển document thành vector đếm theo vocabulary  
+## 2. Kết quả chạy code
 
-3. **Evaluation**  
-   - File: `labs/lab2_count_vectorization.py`  
-   - Dùng `RegexTokenizer` và `CountVectorizer`  
-   - Corpus mẫu:
-     ```python
-     [
-       "I love NLP.",
-       "I love programming.",
-       "NLP is a subfield of AI."
-     ]
-     ```
-   - In vocabulary và document-term matrix  
+### 2.1. Ví dụ corpus
+Corpus:
+```python
+["I love NLP.", "I love programming.", "NLP is a subfield of AI."]
+```
 
-## Deliverables
-- Code trong repo GitHub (public).  
-- File `README.md` hoặc `Report.md` mô tả công việc, kết quả chạy code, giải thích **cách CountVectorizer hoạt động** và ý nghĩa ma trận document-term.  
+- Vocabulary:  
+```
+{'.': 0, 'a': 1, 'ai': 2, 'i': 3, 'is': 4, 'love': 5, 'nlp': 6, 'of': 7, 'programming': 8, 'subfield': 9}
+```
+
+- Document-Term Matrix:  
+```
+[1, 0, 0, 1, 0, 1, 1, 0, 0, 0]
+[1, 0, 0, 1, 0, 1, 0, 0, 1, 0]
+[1, 1, 1, 0, 1, 0, 1, 1, 0, 1]
+```
+
+---
+
+## 3. Giải thích kết quả
+- Vocabulary: tập hợp tất cả token duy nhất xuất hiện trong corpus/dataset.  
+- Document-term matrix: mỗi hàng là một văn bản, mỗi cột là một token, giá trị là số lần xuất hiện.  
+- **CountVectorizer** biến đổi văn bản thành vector số => đầu vào cho mô hình ML (Naive Bayes, Logistic Regression, SVM…).  
+;; - Tokenizer khác nhau (Simple vs Regex) sẽ dẫn đến vocabulary và ma trận khác nhau (RegexTokenizer tạo nhiều token chi tiết hơn).  
+- **Khó khăn**: corpus lớn => vocabulary lớn, cần xử lý ma trận thưa để tiết kiệm bộ nhớ.  
