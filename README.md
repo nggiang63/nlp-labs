@@ -3,20 +3,20 @@
 ```
 nlp-labs/
 │
-├── data/                     
+├── data/             # Dữ liệu        
 │
 ├── src/                      
 │   ├── core/                
-│   │   └── ....py
 │   ├── preprocessing/        
 │   └── ...    
 │
-├── labs/                     
+├── test/             # Test từng lab          
 │   ├── lab1.py
 │   └── ...
 │
-├── report/                    
-│   └── lab1.md
+├── report/           # Báo cáo chi tiết từng lab         
+│   ├── lab1.md
+│   └── ...
 │
 ├── requirements.txt
 ├── README.md
