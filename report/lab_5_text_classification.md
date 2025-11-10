@@ -1,7 +1,9 @@
-# LAB 5: TEXT CLASSIFICATION
+# Lab 5: Text Classification
 
 **Giang Nguyen Thi - 22001254**  
 2025-11-10  
+
+---
 
 ## Task 1: Data Preparation
 
@@ -108,10 +110,10 @@ Xây dựng pipeline xử lý văn bản trên Spark ML để phân loại cảm
 - Đọc file dữ liệu `data/sentiments.csv` chứa hai cột chính: text (nội dung văn bản) và sentiment (nhãn -1 hoặc 1).
 - Chuẩn hóa nhãn cảm xúc bằng cách chuyển sentiment từ giá trị (-1, 1) sang (0, 1) và loại bỏ các dòng có giá trị null.
 - Tạo pipeline tiền xử lý gồm các giai đoạn:
-      + Tokenizer: tách câu thành danh sách các từ.
-      + StopWordsRemover: loại bỏ những từ dừng phổ biến không mang ý nghĩa phân loại.
-      + HashingTF: ánh xạ các từ thành vector đặc trưng dựa trên tần suất.
-      + IDF: tính trọng số ngược tần suất từ để tăng độ quan trọng cho các từ hiếm.
+      - Tokenizer: tách câu thành danh sách các từ.
+      - StopWordsRemover: loại bỏ những từ dừng phổ biến không mang ý nghĩa phân loại.
+      - HashingTF: ánh xạ các từ thành vector đặc trưng dựa trên tần suất.
+      - IDF: tính trọng số ngược tần suất từ để tăng độ quan trọng cho các từ hiếm.
 - Thêm giai đoạn huấn luyện LogisticRegression với các tham số `maxIter=10`, `regParam=0.001`, `featuresCol='features'`, `labelCol='label'`.
 - Gộp tất cả các giai đoạn trên vào Pipeline của Spark ML để tự động hóa toàn bộ quy trình xử lý.
 - Chia dữ liệu thành tập huấn luyện và tập kiểm thử bằng randomSplit([0.8, 0.2], seed=42).
@@ -149,9 +151,9 @@ Thử nghiệm và so sánh các kỹ thuật cải thiện hiệu suất mô h�
 - Khởi tạo SparkSession và đọc dữ liệu `sentiments.csv` (gồm cột text, sentiment).
 - Chuyển đổi nhãn cảm xúc từ (-1, 1) sang (0, 1) và loại bỏ các dòng thiếu dữ liệu.
 - Xây dựng hàm `clean_text()` để làm sạch văn bản:
-      + Xóa URL, thẻ HTML, ký tự đặc biệt và chuyển toàn bộ chữ thành chữ thường.
-      + Đăng ký hàm này thành UDF để áp dụng trên toàn bộ DataFrame Spark.
-      + Tạo thêm cột clean_text chứa phiên bản đã làm sạch của văn bản.
+      - Xóa URL, thẻ HTML, ký tự đặc biệt và chuyển toàn bộ chữ thành chữ thường.
+      - Đăng ký hàm này thành UDF để áp dụng trên toàn bộ DataFrame Spark.
+      - Tạo thêm cột clean_text chứa phiên bản đã làm sạch của văn bản.
 - Chia dữ liệu thành tập huấn luyện và kiểm thử bằng randomSplit([0.8, 0.2], seed=42).
 - Xây dựng hàm `evaluate(predictions, label)` để tự động tính Accuracy và F1-score cho từng mô hình.
 
