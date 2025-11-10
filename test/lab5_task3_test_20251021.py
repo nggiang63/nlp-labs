@@ -3,7 +3,7 @@ import sys, os
 sys.path.append(os.path.abspath(os.path.join(os.getcwd(), "..")))
 
 from sklearn.model_selection import train_test_split
-from src.lab4_20251021.task1_data_preparation import get_dataset_and_vectorizer
+from src.lab5_20251021.task1_data_preparation import get_dataset_and_vectorizer
 from src.models.text_classifier import TextClassifier
 from src.preprocessing.regex_tokenizer import RegexTokenizer
 from src.representations.count_vectorizer import CountVectorizer
