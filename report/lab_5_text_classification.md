@@ -5,7 +5,7 @@
 
 ---
 
-## Task 1: Data Preparation
+## 1. Task 1: Data Preparation
 
 ### Mục tiêu
 Chuẩn bị dữ liệu huấn luyện cho bài toán phân loại cảm xúc bằng cách:
@@ -56,7 +56,7 @@ Text 5: [0, 0, 1, 1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 
 ---
 
-## Task 2: Basic Test Case
+## 2. Task 2: Basic Test Case
 
 ### Mục tiêu
 Xây dựng lớp `TextClassifier` để huấn luyện và đánh giá mô hình Logistic Regression.
@@ -99,7 +99,7 @@ I hate this film, it's terrible. -> Positive
 
 ---
 
-## Advanced Example: Spark Sentiment Analysis
+## 3. Advanced Example: Spark Sentiment Analysis
 
 ### Mục tiêu
 Xây dựng pipeline xử lý văn bản trên Spark ML để phân loại cảm xúc trên tập dữ liệu lớn.
@@ -139,7 +139,7 @@ F1 Score: 0.7266
 
 ---
 
-## Task 4: Model Improvement Experiment
+## 4. Task 4: Model Improvement Experiment
 
 ### Mục tiêu
 Thử nghiệm và so sánh các kỹ thuật cải thiện hiệu suất mô hình:
