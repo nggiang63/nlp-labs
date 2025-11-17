@@ -68,7 +68,7 @@ Tag vocab size: 18
 **Cách thực hiện**
 - Embedding: 128 chiều
 - RNN: 128 chiều ẩn, batch_first
-- Linear: ánh xạ từ 128 → 18 tags
+- Linear: ánh xạ từ 128 => 18 tags
 
 **Nhận xét**
 - Mô hình đơn giản nhưng đủ hiệu quả.
@@ -95,7 +95,7 @@ Epoch 4/5 - Loss: 0.3374
 Epoch 5/5 - Loss: 0.2714  
 
 **Nhận xét**
-- Loss giảm đều → mô hình học tốt
+- Loss giảm đều => mô hình học tốt
 - Loss ~0.27 sau 5 epoch là hợp lý với RNN một chiều
 
 ---
@@ -128,12 +128,11 @@ Students are studying in the library
 ('Students', 'VERB') bị sai do từ hiếm
 
 **Nhận xét**
-- Dev accuracy ~85.5% → tốt với RNN đơn giản
+- Dev accuracy ~85.5% => tốt với RNN đơn giản
 - Sai ở từ hiếm hoặc plural
 
 ---
 
 ## **Kết luận**
-- Hoàn thành đầy đủ 5 Task theo yêu cầu Lab
-- Mô hình hoạt động tốt, pipeline hoàn chỉnh từ load data → train → evaluate → predict
+- Mô hình hoạt động tốt, pipeline hoàn chỉnh từ load data => train => evaluate => predict
 - Có thể nâng cấp bằng BiLSTM, CRF hoặc pretrained embeddings
