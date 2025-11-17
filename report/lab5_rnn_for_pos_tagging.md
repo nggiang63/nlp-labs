@@ -1,6 +1,7 @@
-# **Lab 5 – Xây dựng mô hình RNN cho bài toán Part-of-Speech Tagging**
+# **Lab 5: Xây dựng mô hình RNN cho bài toán Part-of-Speech Tagging**
 
 Giang Nguyen Thi - 22001254 
+
 2025-11-17
 ---
 

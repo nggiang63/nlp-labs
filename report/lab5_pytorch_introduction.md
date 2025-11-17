@@ -1,6 +1,7 @@
 # **Lab 5: Pytorch Introduction**
 
 Giang Nguyen Thi - 22001254 
+
 2025-11-17
 ---
 
@@ -9,7 +10,7 @@ Toàn bộ code thực thi cho các mô hình được đặt tại:
 
 ---
 
-# **1. Mục tiêu**
+## **Mục tiêu chung**
 
 - Hiểu và thao tác với **Tensor** – cấu trúc dữ liệu quan trọng nhất của PyTorch.  
 - Biết cách sử dụng **autograd** để tự động tính đạo hàm.  
@@ -20,12 +21,6 @@ Toàn bộ code thực thi cho các mô hình được đặt tại:
 - Chuẩn bị nền tảng cho các lab tiếp theo: RNN, LSTM, mô hình phân loại văn bản.
 
 ---
-
-# **2. Các bước thực hiện**
-
----
-
-# **PHẦN 1 – TENSOR: KHÁM PHÁ CẤU TRÚC DỮ LIỆU CỐT LÕI**
 
 ## **Task 1.1 – Tạo Tensor**
 
@@ -126,8 +121,6 @@ print(reshaped)
 
 ---
 
-# **PHẦN 2 – AUTOGRAD: TỰ ĐỘNG TÍNH ĐẠO HÀM**
-
 ## **Task 2.1 – Tính gradient của biểu thức**
 
  **Code**
@@ -165,8 +158,6 @@ z.backward(retain_graph=True)
 ```
 
 ---
-
-# **PHẦN 3 – Xây dựng mô hình đầu tiên bằng torch.nn**
 
 ## **Task 3.1 – Lớp nn.Linear**
 
@@ -236,7 +227,7 @@ print(output_data)
 
 ---
 
-# **3. Kết luận**
+## **3. Kết luận**
 
 - Nắm vững **Tensor** và các thao tác cơ bản.  
 - Hiểu cơ chế **tự động tính gradient**.  
