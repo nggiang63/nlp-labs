@@ -1,7 +1,6 @@
 # **Lab 5: Pytorch Introduction**
 
-Giang Nguyen Thi - 22001254 
-
+Giang Nguyen Thi - 22001254   
 2025-11-17
 ---
 
