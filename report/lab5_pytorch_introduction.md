@@ -1,6 +1,12 @@
 # **Lab 5: Pytorch Introduction**
+
 Giang Nguyen Thi - 22001254 
 2025-11-17
+---
+
+Toàn bộ code thực thi cho các mô hình được đặt tại:  
+**`nlp-labs/notebook/lab5_pytorch_introduction.ipynb`**
+
 ---
 
 # **1. Mục tiêu**
