@@ -1,5 +1,7 @@
 # **Lab5: Xây dựng mô hình RNN cho bài toán Nhận dạng Thực thể Tên (NER)**
+
 Giang Nguyen Thi - 22001254
+
 2025-11-18
 
 ## **Task 1: Tải và Tiền xử lý Dữ liệu**
