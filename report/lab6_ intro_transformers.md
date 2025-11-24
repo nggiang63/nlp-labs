@@ -6,15 +6,19 @@ Giang Nguyen Thi - 22001254
 
 **Mục tiêu**
 - Làm quen với pipeline `fill-mask` của HuggingFace.
-- Dự đoán một token bị che `[MASK]`.
+- Dự đoán một token bị che `<mask>`.
 - Hiểu vì sao các mô hình Encoder-only (BERT, RoBERTa…) phù hợp với MLM.
 
 **Cách thực hiện**
-- Sử dụng pipeline `"fill-mask"` (mặc định dùng DistilRoBERTa-base).
-- Nhập câu:
-```
-Hanoi is the [MASK] of Vietnam.
-```
+- Import pipeline từ Transformers.
+- Khởi tạo pipeline `"fill-mask"` (mặc định DistilRoBERTa-base).
+- Chuẩn bị câu:
+  ```
+  Hanoi is the <mask> of Vietnam.
+  ```
+- Mô hình dự đoán 5 token có xác suất cao nhất.
+- Ghi nhận token_str và score.
+
 - Lấy top 5 dự đoán.
 
 **Kết quả**
@@ -45,6 +49,7 @@ Hanoi is the [MASK] of Vietnam.
 
 **Cách thực hiện**
 - Dùng pipeline `"text-generation"`.
+- Sử dụng mô hình GPT-2 (mặc định).
 - Prompt:
 ```
 The best thing about learning NLP is
@@ -73,7 +78,12 @@ Mô hình sinh một đoạn văn dài, mạch lạc và liên quan đến NLP.
 - Thực hành Mean Pooling.
 
 **Cách thực hiện**
-- Tokenize => last_hidden_state => Mean Pooling với attention_mask.
+- Load tokenizer và model BERT-base-uncased.
+- Tokenize câu => lấy `last_hidden_state`.
+- Thực hiện Mean Pooling:
+  - Nhân embedding với attention_mask
+  - Chia cho tổng số token thật
+- Nhận vector cuối cùng dạng `(1, hidden_size)`.
 
 **Kết quả**
 - Vector có dạng tensor([...])
