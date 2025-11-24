@@ -34,11 +34,13 @@ Giang Nguyen Thi - 22001254
 
 **Trả lời câu hỏi**
 1. Mô hình đã dự đoán đúng từ capital không?
--> Mô hình dự đoán đúng từ capital
+-> Có. Trong 5 kết quả mô hình trả về, "capital" có độ tin cậy 0.9341, cao nhất và đúng ngữ nghĩa trong câu "Hanoi is the capital of Vietnam."
 
 2. Tại sao các mô hình Encoder-only như BERT lại phù hợp cho tác vụ này?
--> Vì chúng dùng cơ chế attention hai chiều (bidirectional), cho phép mô hình nhìn cả ngữ cảnh trái và phải để dự đoán token bị che. Hơn nữa, MLM chính là mục tiêu pre-training gốc của BERT, nên kiến trúc này tối ưu cho tác vụ fill-mask và đạt độ chính xác cao.
-
+-> Vì:
+- Self-attention hai chiều (bidirectional) => nhìn được cả ngữ cảnh bên trái và phải của token `<mask>`.  
+- MLM là nhiệm vụ pretraining của BERT => mô hình được tối ưu để dự đoán từ bị che.  
+- Encoder-only tập trung vào "hiểu" câu => rất phù hợp cho tác vụ điền khuyết từ.
 ---
 
 ## **Bài 2: Dự đoán từ tiếp theo (Next Token Prediction)**
