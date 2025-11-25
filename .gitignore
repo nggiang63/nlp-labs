@@ -210,3 +210,6 @@ __marimo__/
 
 # Bỏ qua các file GloVe nặng
 src/lab4/glove.6B.*
+
+
+data/
