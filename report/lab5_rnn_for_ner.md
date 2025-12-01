@@ -4,6 +4,8 @@ Giang Nguyen Thi - 22001254
 
 2025-11-18
 
+---
+
 ## **Task 1: Tải và Tiền xử lý Dữ liệu**
 
 **Mục tiêu**
@@ -29,6 +31,8 @@ Giang Nguyen Thi - 22001254
 - Vocabulary lớn => NER là bài toán khó.
 - Dữ liệu đúng format nên không cần chỉnh sửa thêm.
 
+---
+
 ## **Task 2: Tạo PyTorch Dataset và DataLoader**
 
 **Mục tiêu**
@@ -47,6 +51,8 @@ Giang Nguyen Thi - 22001254
 **Nhận xét**
 - Dataset và DataLoader hoạt động đúng chuẩn token classification.
 - Pad_sequence giúp xử lý biến độ dài hiệu quả.
+
+---
 
 ## **Task 3: Xây dựng Mô hình RNN**
 
@@ -71,6 +77,8 @@ Giang Nguyen Thi - 22001254
 - RNN hoạt động đúng nhưng chưa phải lựa chọn tối ưu cho NER.
 - Bi-LSTM có thể cải thiện kết quả hơn.
 
+---
+
 ## **Task 4: Huấn luyện Mô hình**
 
 **Mục tiêu**
@@ -90,6 +98,8 @@ Giang Nguyen Thi - 22001254
 **Nhận xét**
 - Loss giảm đều => mô hình học tốt.
 - Giá trị loss thấp hợp lý với mô hình đơn giản.
+
+---
 
 ## **Task 5: Đánh giá Mô hình**
 
@@ -141,6 +151,8 @@ Giang Nguyen Thi - 22001254
 - Dùng seqeval để đánh giá đúng chuẩn entity-level.
 - Đề xuất nâng cấp mô hình lên Bi-LSTM hoặc Bi-LSTM-CRF.
 
+---
+
 ## **Hướng dẫn chạy code**
 
 **Thực hiện theo 4 bước**
@@ -158,10 +170,14 @@ Giang Nguyen Thi - 22001254
 3. Chạy tuần tự các cell theo 5 Task.
 4. Dùng `predict_sentence()` để kiểm thử mô hình.
 
+---
+
 ## **Kết luận**
 - Pipeline hoàn chỉnh: tải dữ liệu => xử lý => huấn luyện => đánh giá => suy luận.
 - Mô hình RNN đạt kết quả ổn với bài toán NER cơ bản.
 - Nếu dùng Bi-LSTM hoặc CRF sẽ cải thiện F1-score đáng kể.
+
+---
 
 ## **Tài liệu tham khảo**
 1. PyTorch Team. (2024). PyTorch Documentation – RNN, LSTM, GRU Modules.

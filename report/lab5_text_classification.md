@@ -1,6 +1,7 @@
 # Lab 5: Text Classification
 
-**Giang Nguyen Thi - 22001254**  
+Giang Nguyen Thi - 22001254  
+
 2025-11-10  
 
 ---
@@ -190,6 +191,20 @@ E. CleanText + TF-IDF + NaiveBayes            Accuracy=0.7259 | F1=0.7261
 
 ---
 
+## Khó khăn & Giải pháp
+
+| Khó khăn | Nguyên nhân | Giải pháp |
+|---------|-------------|-----------|
+| Dataset nhỏ nên mô hình học không ổn định | Chỉ 6 câu ở phần sklearn demo và tập sentiments.csv rất hạn chế về đa dạng ngôn ngữ | Sử dụng k-fold validation hoặc tăng dữ liệu bằng augmentation |
+| TF-IDF với dữ liệu nhiễu (URL, ký tự đặc biệt) | Văn bản chứa ký tự gây nhiễu → vector hóa sai trọng số | Sử dụng bước CleanText (lowercase, remove URL, HTML, punctuation) như trong Task Improve |
+| Logistic Regression bị ảnh hưởng bởi imbalance label | Nhãn sentiment có thể lệch phân bố | Sử dụng `class_weight="balanced"` hoặc oversampling |
+| Word2Vec cho kết quả thấp | Tập huấn luyện Word2Vec nhỏ, embedding không ổn định | Dùng pretrained Word2Vec hoặc FastText để giảm OOV và tăng độ ổn định |
+| Spark Word2Vec + LR kém hơn TF-IDF | Word2Vec không nắm bắt từ khóa tốt bằng TF-IDF trong bài toán classification | Chỉ dùng Word2Vec khi dataset lớn và nhiều ngữ cảnh |
+| Naive Bayes kém hơn Logistic Regression | NB giả định độc lập đặc trưng nên không tận dụng tốt TF-IDF nặng ngữ nghĩa | Dùng Logistic Regression hoặc Linear SVM cho hiệu quả cao hơn |
+| Mất thông tin khi Tokenizer cắt câu dài | max_len nhỏ dẫn đến mất bối cảnh quan trọng | Tăng max_len hoặc dùng mô hình Transformer không phụ thuộc padding cứng |
+| Khó tái sản xuất kết quả Spark vì randomSplit | randomSplit thay đổi dữ liệu train/test | Thêm seed cố định để đảm bảo reproducibility |
+
+---
 ## Tài liệu tham khảo
 1. *scikit-learn Documentation*: https://scikit-learn.org/stable/ (Các module LogisticRegression, CountVectorizer, TfidfVectorizer, và các hàm đánh giá như accuracy_score, precision_score, recall_score, f1_score trong phần cài đặt và đánh giá mô hình)
 2. *Apache Spark MLlib Guide*: https://spark.apache.org/docs/latest/ml-guide.html (Các thành phần Tokenizer, StopWordsRemover, HashingTF, IDF, Word2Vec, cùng mô hình LogisticRegression và NaiveBayes trong Spark ML.)

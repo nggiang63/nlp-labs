@@ -1,15 +1,17 @@
-# **Lab 5: Phân loại Văn bản với Mạng Nơ-ron Hồi quy (RNN/LSTM)**
+# Lab 5: Phân loại Văn bản với Mạng Nơ-ron Hồi quy (RNN/LSTM)
 
 Giang Nguyen Thi - 22001254    
 2025-11-17
 ---
 
+## Hướng dẫn chạy code 
+
 Toàn bộ code thực thi cho các mô hình được đặt tại:  
-**`nlp-labs/notebook/lab5_rnns_text_classification.ipynb`**
+`nlp-labs/notebook/lab5_rnns_text_classification.ipynb`
 
 ---
 
-## **Mục tiêu chung**
+## Mục tiêu chung
 
 Phần thực nghiệm này nhằm:
 
@@ -23,85 +25,85 @@ Phần thực nghiệm này nhằm:
 
 ---
 
-## **Task 0 - Thiết lập Môi trường và Tải Dữ liệu**
+## Task 0 - Thiết lập Môi trường và Tải Dữ liệu
 
-**Mục tiêu**
+Mục tiêu
 - Tải đúng 3 tập train/val/test.
 - Chuẩn hóa nhãn intent về dạng số nguyên sử dụng `LabelEncoder`.
 
-**Các bước thực hiện**
+Các bước thực hiện
 - Đọc dữ liệu từ thư mục `../data/hwu/`.
 - Mỗi file gồm 2 cột: *text*, *intent*.
 - Ánh xạ toàn bộ intent sang số bằng một bộ `LabelEncoder` duy nhất.
 - Khởi tạo số lớp `num_classes`.
 
-**Nhận xét**
+Nhận xét
 - Dữ liệu HWU được tổ chức tốt, phù hợp cho tác vụ intent classification.
 - Dùng chung một `LabelEncoder` cho toàn bộ các tập giúp đảm bảo nhãn nhất quán.
 
 ---
 
-## **Task 1 - (Warm-up Ôn bài cũ) Pipeline TF-IDF + Logistic Regression**
+## Task 1 - (Warm-up Ôn bài cũ) Pipeline TF-IDF + Logistic Regression
 
-**Mục tiêu**
+Mục tiêu
 - Thiết lập baseline cổ điển để có chuẩn so sánh với các mô hình LSTM.
 
-**Các bước thực hiện**
+Các bước thực hiện
 - Chuyển văn bản thành vector TF-IDF (`max_features = 5000`).
 - Huấn luyện Logistic Regression với `max_iter = 1000`.
 - Đánh giá bằng F1-macro và test loss.
 
-**Kết quả**
-- **F1-macro:** 0.822567  
-- **Test Loss:** 1.052858  
+Kết quả
+- F1-macro: 0.822567  
+- Test Loss: 1.052858  
 
-**Nhận xét**
-- Đây là mô hình cho kết quả **tốt nhất** trong cả 4 pipeline.  
+Nhận xét
+- Đây là mô hình cho kết quả tốt nhất trong cả 4 pipeline.  
 - TF-IDF rất hiệu quả với câu truy vấn ngắn, khi từ khóa thể hiện intent rất rõ ràng.  
 - Dù không học được thứ tự từ, TF-IDF + LR vẫn nhận diện intent rất mạnh nhờ đặc trưng từ vựng.
 
 ---
 
-## **Task 2 - (Warm-up Ôn bài cũ) Pipeline Word2Vec (Trung bình) + Dense Layer**
+## Task 2 - (Warm-up Ôn bài cũ) Pipeline Word2Vec (Trung bình) + Dense Layer
 
-**Mục tiêu**
+Mục tiêu
 - Biểu diễn câu bằng trung bình vector từ Word2Vec.  
 - So sánh với TF-IDF để thấy hạn chế của biểu diễn “không có ngữ cảnh”.
 
-**Các bước thực hiện**
+Các bước thực hiện
 - Huấn luyện Word2Vec (`vector_size = 100`) trên tập train.
 - Tính vector trung bình cho từng câu.
 - Huấn luyện mô hình Dense đơn giản.
 - Đánh giá bằng F1-macro và test loss.
 
-**Kết quả**
-- **F1-macro:** 0.796896  
-- **Test Loss:** 0.724759  
+Kết quả
+- F1-macro: 0.796896  
+- Test Loss: 0.724759  
 
-**Nhận xét**
+Nhận xét
 - Word2Vec trung bình cho kết quả khá tốt, gần tiệm cận TF-IDF.  
 - Dù mất thứ tự từ và không học được ngữ cảnh, nhưng do câu intent ngắn và nhiều từ khóa đặc trưng nên mô hình vẫn hoạt động hiệu quả.  
 - Embedding Word2Vec học từ tập nhỏ nên vẫn có hạn chế so với pre-trained lớn hơn.
 
 ---
 
-## **Task 3 - Mô hình Nâng cao (Embedding Pre-trained + LSTM)**
+## Task 3 - Mô hình Nâng cao (Embedding Pre-trained + LSTM)
 
-**Mục tiêu**
+Mục tiêu
 - Khởi tạo embedding từ mô hình Word2Vec đã huấn luyện ở Task 2.  
 - Dùng LSTM để học quan hệ chuỗi và ngữ cảnh.
 
-**Các bước thực hiện**
+Các bước thực hiện
 - Tokenizer + padding (*max_len = 50*).  
 - Dùng embedding matrix từ Word2Vec và nạp vào `Embedding(trainable=False)`.  
 - Mô hình gồm: Embedding => LSTM(128) => Dense softmax.  
 - Huấn luyện với EarlyStopping.
 
-**Kết quả**
-- **F1-macro:** 0.640867  
-- **Test Loss:** 1.050412  
+Kết quả
+- F1-macro: 0.640867  
+- Test Loss: 1.050412  
 
-**Nhận xét**
+Nhận xét
 - Mô hình đã học tốt hơn rất nhiều so với phiên bản cũ (F1 tăng mạnh).  
 - Tuy nhiên vẫn kém TF-IDF và Word2Vec Avg.  
 - Nguyên nhân:
@@ -111,31 +113,31 @@ Phần thực nghiệm này nhằm:
 
 ---
 
-## **Task 4 - Mô hình Nâng cao (Embedding học từ đầu + LSTM)**
+## Task 4 - Mô hình Nâng cao (Embedding học từ đầu + LSTM)
 
-**Mục tiêu**
+Mục tiêu
 - Cho LSTM tự học embedding từ đầu.
 
-**Các bước thực hiện**
+Các bước thực hiện
 - Tokenizer + Padding.  
 - Embedding(output_dim=100, trainable=True).  
 - LSTM(128) + Dense softmax.  
 - EarlyStopping.
 
-**Kết quả**
-- **F1-macro:** 0.000533  
-- **Test Loss:** 4.128992  
+Kết quả
+- F1-macro: 0.000533  
+- Test Loss: 4.128992  
 
-**Nhận xét**
-- Mô hình **collapse hoàn toàn**, gần như dự đoán 1 lớp.  
+Nhận xét
+- Mô hình collapse hoàn toàn, gần như dự đoán 1 lớp.  
 - Dataset nhỏ => embedding từ đầu bị overfit nặng.  
 - LSTM học không hiệu quả khi dữ liệu quá nhỏ.
 
 ---
 
-## **Task 5 - Tổng hợp kết quả và phân tích**
+## Task 5 - Tổng hợp kết quả và phân tích
 
-**Bảng tổng hợp định lượng**
+Bảng tổng hợp định lượng
 
 | Model                         | F1-macro | Test Loss |
 |------------------------------|----------|-----------|
@@ -146,22 +148,22 @@ Phần thực nghiệm này nhằm:
 
 ---
 
-**Nhận xét chung**
+Nhận xét chung
 
-- **TF-IDF + Logistic Regression** vẫn là mô hình tốt nhất trên dataset nhỏ và câu truy vấn ngắn.  
-- **Word2Vec Average** đạt kết quả cao hơn mong đợi, gần tiệm cận TF-IDF.  
-- **LSTM Pretrained** có tiến bộ rõ rệt nhưng vẫn chưa vượt mô hình cổ điển.  
-- **LSTM Scratch** thất bại hoàn toàn.  
-- => Với dataset nhỏ, **mô hình cổ điển dựa trên từ khóa vẫn hiệu quả hơn mô hình chuỗi**.
+- TF-IDF + Logistic Regression vẫn là mô hình tốt nhất trên dataset nhỏ và câu truy vấn ngắn.  
+- Word2Vec Average đạt kết quả cao hơn mong đợi, gần tiệm cận TF-IDF.  
+- LSTM Pretrained có tiến bộ rõ rệt nhưng vẫn chưa vượt mô hình cổ điển.  
+- LSTM Scratch thất bại hoàn toàn.  
+- => Với dataset nhỏ, mô hình cổ điển dựa trên từ khóa vẫn hiệu quả hơn mô hình chuỗi.
 
 ---
 
 Trong phần này, ba câu truy vấn có cấu trúc phức tạp hoặc chứa phủ định được chọn để kiểm tra khả năng hiểu ngữ cảnh của các mô hình.  
-Kết quả dự đoán bên dưới là **kết quả thực tế** chạy từ notebook.
+Kết quả dự đoán bên dưới là kết quả thực tế chạy từ notebook.
 
-## **Phân tích định tính một số câu khó**
+## Phân tích định tính một số câu khó
 
-Bảng dưới đây trình bày **kết quả dự đoán thực tế** từ 4 mô hình trên 3 câu có cấu trúc phức tạp hoặc chứa phủ định.
+Bảng dưới đây trình bày kết quả dự đoán thực tế từ 4 mô hình trên 3 câu có cấu trúc phức tạp hoặc chứa phủ định.
 
 | Câu kiểm tra | Nhãn đúng | TF-IDF + LR | Word2Vec Avg + Dense | LSTM Pretrained | LSTM Scratch | Nhận xét |
 |--------------|-----------|--------------|------------------------|------------------|---------------|----------|
@@ -171,25 +173,55 @@ Bảng dưới đây trình bày **kết quả dự đoán thực tế** từ 4 
 
 ---
 
-**Kết luận định tính**
+Kết luận định tính
 
-- **TF-IDF + LR** cho kết quả tốt nhất, dù vẫn sai ở câu dài/phức tạp.  
-- **Word2Vec Avg + Dense** dự đoán thiếu ổn định => mất ngữ cảnh, mất phủ định.  
-- **LSTM Pretrained** không phát huy hiệu quả do Word2Vec quá yếu và embedding bị “đóng băng”.  
-- **LSTM Scratch** bị **collapse** về 1 lớp (“music_query”) => overfitting rất nặng.
+- TF-IDF + LR cho kết quả tốt nhất, dù vẫn sai ở câu dài/phức tạp.  
+- Word2Vec Avg + Dense dự đoán thiếu ổn định => mất ngữ cảnh, mất phủ định.  
+- LSTM Pretrained không phát huy hiệu quả do Word2Vec quá yếu và embedding bị “đóng băng”.  
+- LSTM Scratch bị collapse về 1 lớp (“music_query”) => overfitting rất nặng.
 
-=> **Không mô hình nào thực sự hiểu được ngữ cảnh trong 3 câu khó.**  
+=> Không mô hình nào thực sự hiểu được ngữ cảnh trong 3 câu khó.  
 => LSTM không mạnh hơn TF-IDF trong trường hợp dataset nhỏ và embedding yếu.
 
 ---
 
-## **Kết luận chung của phần thực nghiệm**
+## Kết luận chung của phần thực nghiệm
 
 - TF-IDF + Logistic Regression hiện là lựa chọn tốt nhất cho dataset nhỏ, câu ngắn và phân loại intent.  
 - Word2Vec trung bình và LSTM đều thể hiện kém khi dữ liệu hạn chế.  
 - Kỹ thuật học chuỗi chỉ phát huy khi:
   - Dataset lớn.  
   - Embedding mạnh (GloVe, FastText, BERT…).  
-- Thực nghiệm cho thấy tầm quan trọng của **đủ dữ liệu** và **embedding chất lượng cao** khi dùng LSTM.
+- Thực nghiệm cho thấy tầm quan trọng của đủ dữ liệu và embedding chất lượng cao khi dùng LSTM.
 
 ---
+
+## Khó khăn & Giải pháp
+
+| Khó khăn | Nguyên nhân | Giải pháp |
+|---------|-------------|-----------|
+| LSTM (scratch embedding) collapse hoàn toàn | Dataset nhỏ → embedding học từ đầu bị overfit và mô hình chỉ dự đoán 1 lớp | Giới hạn số epoch, dùng dropout, tăng dữ liệu, hoặc dùng embedding pre-trained (GloVe/FastText) |
+| LSTM với Word2Vec pre-trained vẫn kém | Word2Vec được train trên corpus nhỏ → vector yếu | Dùng Word2Vec lớn hơn (GoogleNews 300d) hoặc GloVe 6B |
+| Không mô hình nào hiểu được phủ định hoặc câu dài | LSTM một chiều không nắm được quan hệ dài và phủ định | Dùng Bi-LSTM, Attention, hoặc BERT/DistilBERT |
+| Câu dài → mất thông tin khi padding/truncation | max_len=50 có thể cắt mất ngữ cảnh quan trọng | Tăng max_len hoặc dùng Transformer |
+| LSTM chậm hơn TF-IDF + LR | LR học rất nhanh với vector sparse | Dùng GPU, giảm batch size, thêm early stopping |
+| Mất cân bằng nhãn → F1-macro thấp | Nhiều intent hiếm → mô hình khó học | Dùng class weight, focal loss, oversampling |
+| Tokenizer không đồng nhất → nhiều OOV | Từ hiếm trong HWU → Word2Vec không có vector | Dùng FastText hoặc pretrained embedding mạnh hơn |
+| Ngữ nghĩa thấp trong dataset nhỏ | Câu ngắn, ít ngữ cảnh → LSTM không phát huy hiệu quả | Thu thập thêm dữ liệu hoặc dùng model pretrained lớn |
+
+## Tài liệu tham khảo
+
+1. Mikolov, T., Chen, K., Corrado, G., & Dean, J. (2013).  
+   *Efficient Estimation of Word Representations in Vector Space.*  
+   https://arxiv.org/abs/1301.3781  
+
+2. Pennington, J., Socher, R., & Manning, C. D. (2014).  
+   *GloVe: Global Vectors for Word Representation.*  
+   https://aclanthology.org/D14-1162/  
+
+3. scikit-learn Documentation – TF-IDF & Logistic Regression  
+   https://scikit-learn.org/stable/modules/feature_extraction.html  
+   https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html  
+
+4. Keras / TensorFlow NLP Examples  
+   https://keras.io/examples/nlp/text_classification_from_scratch/  

@@ -1,7 +1,7 @@
 # **Lab 5: Pytorch Introduction**
+**Giang Nguyen Thi - 22001254**  
+2025-11-17  
 
-Giang Nguyen Thi - 22001254   
-2025-11-17
 ---
 
 Toàn bộ code thực thi cho các mô hình được đặt tại:  
@@ -9,11 +9,11 @@ Toàn bộ code thực thi cho các mô hình được đặt tại:
 
 ---
 
-## **Mục tiêu chung**
+## **1. Mục tiêu chung**
 
-- Hiểu và thao tác với **Tensor** – cấu trúc dữ liệu quan trọng nhất của PyTorch.  
+- Hiểu và thao tác với **Tensor** - cấu trúc dữ liệu quan trọng nhất của PyTorch.  
 - Biết cách sử dụng **autograd** để tự động tính đạo hàm.  
-- Làm quen với 2 lớp cơ bản của PyTorch:  
+- Làm quen với các lớp cơ bản của PyTorch:  
   - `nn.Linear`  
   - `nn.Embedding`  
 - Biết cách xây dựng một mô hình neural network bằng cách kế thừa **nn.Module**.  
@@ -21,9 +21,33 @@ Toàn bộ code thực thi cho các mô hình được đặt tại:
 
 ---
 
-## **Task 1.1 – Tạo Tensor**
+## **2. Hướng dẫn chạy code (Code Execution Guide)**
 
- **Code**
+**2.1. Cài đặt môi trường**
+
+Cài PyTorch CPU:
+```bash
+pip install torch --index-url https://download.pytorch.org/whl/cpu
+```
+
+Cài PyTorch GPU (nếu có CUDA 11+):
+```bash
+pip install torch --index-url https://download.pytorch.org/whl/cu118
+```
+
+Cài dependencies khác:
+```bash
+pip install numpy matplotlib
+```
+
+**2.3. Cấu trúc và cách chạy notebook**
+Truy cập file `lab5_pytorch_introduction.ipynb` và chạy các cell trong đó.
+
+---
+
+## **3. Task 1.1 - Tạo Tensor**
+
+**Code**
 ```python
 import torch
 import numpy as np
@@ -45,7 +69,7 @@ print(x_rand)
 print(x_rand.shape, x_rand.dtype, x_rand.device)
 ```
 
- **Kết quả (rút gọn)**
+**Kết quả (rút gọn)**
 ```
 tensor([[1, 2],
         [3, 4]])
@@ -56,23 +80,23 @@ tensor([[0.3941, 0.2430],
 torch.Size([2, 2]) torch.float32 cpu
 ```
 
- **Nhận xét**
+**Nhận xét**
 - Tensor có thể tạo từ list hoặc NumPy array.  
 - `ones_like`, `rand_like` tạo tensor theo shape có sẵn.  
-- Tất cả tensor mặc định lưu trên **CPU** – có thể chuyển sang GPU với `to('cuda')`.
+- Tất cả tensor mặc định lưu trên **CPU** - có thể chuyển sang GPU với `to('cuda')`.
 
 ---
 
-## **Task 1.2 – Các phép toán trên Tensor**
+## **4. Task 1.2 - Các phép toán trên Tensor**
 
- **Code**
+**Code**
 ```python
 print(x_data + x_data)
 print(x_data * 5)
 print(x_data @ x_data.T)
 ```
 
- **Kết quả**
+**Kết quả**
 ```
 tensor([[2, 4],
         [6, 8]])
@@ -84,45 +108,45 @@ tensor([[ 5, 11],
         [11, 25]])
 ```
 
- **Nhận xét**
-- PyTorch hỗ trợ toán tử vector/matrix như NumPy.  
+**Nhận xét**
+- PyTorch hỗ trợ toán tử vector/matrix giống NumPy.  
 - Toán tử `@` dùng cho nhân ma trận.
 
 ---
 
-## **Task 1.3 – Indexing & Slicing**
+## **5. Task 1.3 - Indexing & Slicing**
 
- **Code**
+**Code**
 ```python
 x_data[0]
 x_data[:, 1]
 x_data[1, 1]
 ```
 
- **Nhận xét**
+**Nhận xét**
 - Cách truy cập phần tử giống NumPy.  
 - Hỗ trợ slicing và indexing linh hoạt.
 
 ---
 
-## **Task 1.4 – Thay đổi hình dạng Tensor**
+## **6. Task 1.4 - Thay đổi hình dạng Tensor**
 
- **Code**
+**Code**
 ```python
 x = torch.rand(4,4)
 reshaped = x.view(16,1)
 print(reshaped)
 ```
 
- **Nhận xét**
+**Nhận xét**
 - `.view()` và `.reshape()` dùng để thay đổi shape.  
-- Số phần tử phải giữ nguyên.
+- Tổng số phần tử phải giữ nguyên.
 
 ---
 
-## **Task 2.1 – Tính gradient của biểu thức**
+## **7. Task 2.1 - Tính gradient của biểu thức**
 
- **Code**
+**Code**
 ```python
 x = torch.ones(1, requires_grad=True)
 y = x + 2
@@ -132,35 +156,32 @@ z.backward()
 print(x.grad)   # dz/dx = 18
 ```
 
- **Kết quả**
+**Kết quả**
 ```
 tensor([18.])
 ```
 
- **Giải thích**
+**Giải thích**
 - \( y = x+2 \)  
 - \( z = 3y^2 = 3(x+2)^2 \)  
-- \( dz/dx = 6(x+2) \Rightarrow 18 \)
+- \( dz/dx = 6(x+2) = 18 \)
 
- **Câu hỏi: Nếu gọi z.backward() lần nữa?**
-
-->  PyTorch sẽ báo lỗi:
+**Lưu ý:**  
+Gọi lại `z.backward()` lần nữa sẽ lỗi:
 ```
 RuntimeError: Trying to backward through the graph a second time...
 ```
 
-**Lý do:** autograd giải phóng computational graph sau khi backward.  
-Muốn backward nhiều lần:
-
+Giải pháp:
 ```python
 z.backward(retain_graph=True)
 ```
 
 ---
 
-## **Task 3.1 – Lớp nn.Linear**
+## **8. Task 3.1 - Lớp nn.Linear**
 
- **Code**
+**Code**
 ```python
 linear_layer = nn.Linear(5, 2)
 input_tensor = torch.randn(3, 5)
@@ -168,18 +189,18 @@ output = linear_layer(input_tensor)
 print(output)
 ```
 
- **Nhận xét**
+**Nhận xét**
 - Linear layer thực hiện phép biến đổi:  
   \[
   y = xW^T + b
   \]
-- Output có shape (batch_size, output_dim).
+- Output có shape `(batch_size, output_dim)`.
 
 ---
 
-## **Task 3.2 – Lớp nn.Embedding**
+## **9. Task 3.2 - Lớp nn.Embedding**
 
- **Code**
+**Code**
 ```python
 embedding_layer = nn.Embedding(10, 3)
 input_idx = torch.LongTensor([1, 5, 0, 8])
@@ -187,15 +208,15 @@ emb = embedding_layer(input_idx)
 print(emb)
 ```
 
- **Nhận xét**
-- Embedding hoạt động giống **bảng tra cứu từ vựng**.  
-- Rất quan trọng trong NLP.
+**Nhận xét**
+- Embedding giống **bảng tra cứu từ vựng**.  
+- Rất quan trọng trong các mô hình NLP.
 
 ---
 
-## **Task 3.3 – Định nghĩa mô hình bằng nn.Module**
+## **10. Task 3.3 - Định nghĩa mô hình bằng nn.Module**
 
- **Code**
+**Code**
 ```python
 class MyFirstModel(nn.Module):
     def __init__(self, vocab_size, embedding_dim, hidden_dim, output_dim):
@@ -216,24 +237,33 @@ output_data = model(input_data)
 print(output_data)
 ```
 
- **Nhận xét**
-- Mô hình gồm:  
+**Nhận xét**
+- Mô hình gồm pipeline:  
   - Embedding  
   - Linear  
   - ReLU  
-  - Output Linear  
-- Đây là pipeline nền tảng cho mọi mô hình NLP dùng embedding + encoder.
+  - Linear output  
+- Đây là nền tảng cho mọi mô hình NLP hiện đại.
 
 ---
 
-## **3. Kết luận**
+## **11. Khó khăn & Giải pháp**
 
-- Nắm vững **Tensor** và các thao tác cơ bản.  
-- Hiểu cơ chế **tự động tính gradient**.  
-- Làm quen với **nn.Linear**, **nn.Embedding**.  
-- Tự định nghĩa mô hình bằng `nn.Module`.  
-
--> Đây là nền tảng quan trọng để học tiếp LSTM, RNN và mô hình phân loại văn bản ở các Lab sau.
+| Khó khăn | Nguyên nhân | Giải pháp |
+|---------|-------------|-----------|
+| Lỗi “Trying to backward through the graph a second time” | Autograd xoá graph sau khi backward | Dùng `retain_graph=True` |
+| Mismatch shape khi đưa tensor qua nn.Linear | Sai chiều `(batch, dim)` | In `.shape` tại từng bước để debug |
+| Lỗi dùng FloatTensor cho Embedding | Embedding **bắt buộc** LongTensor | Ép kiểu: `.long()` |
+| GPU/CPU mismatch | Một tensor ở CPU, tensor khác ở GPU | Dùng `.to(device)` thống nhất device |
+| `.view()` lỗi do tensor không contiguous | `.view()` yêu cầu contiguous memory | Dùng `.reshape()` hoặc `.contiguous()` |
 
 ---
 
+## **12. Tài liệu tham khảo**
+
+1. PyTorch Official Documentation - https://pytorch.org/docs/stable/index.html  
+2. Autograd Mechanics - https://pytorch.org/tutorials/beginner/blitz/autograd_tutorial.html  
+3. Neural Networks with nn.Module - https://pytorch.org/tutorials/beginner/nn_tutorial.html  
+4. Embedding Layer Guide - https://pytorch.org/docs/stable/generated/torch.nn.Embedding.html  
+
+---

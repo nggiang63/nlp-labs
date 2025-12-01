@@ -1,10 +1,19 @@
 # **Lab 5: Xây dựng mô hình RNN cho bài toán Part-of-Speech Tagging**
 
 Giang Nguyen Thi - 22001254   
+
 2025-11-17
+
 ---
 
+## Mục tiêu chung 
+
+Lab này nhằm xây dựng một mô hình RNN cho bài toán Part-of-Speech Tagging, giúp sinh viên nắm vững quy trình xử lý dữ liệu CoNLL-U, tạo Dataset/DataLoader với padding, sử dụng các lớp Embedding–RNN–Linear của PyTorch, huấn luyện mô hình gán nhãn từ loại và đánh giá kết quả dự đoán trên câu mới.
+
+## Hướng dẫn chạy code 
+
 Toàn bộ code thực thi cho các mô hình được đặt tại:  
+
 **`nlp-labs/notebook/lab5_rnns_pos_tagging.ipynb`**
 
 ---
@@ -135,4 +144,28 @@ Students are studying in the library
 
 ## **Kết luận**
 - Mô hình hoạt động tốt, pipeline hoàn chỉnh từ load data => train => evaluate => predict
-- Có thể nâng cấp bằng BiLSTM, CRF hoặc pretrained embeddings
+- Mô hình RNN đạt kết quả tốt cho bài toán POS-tagging cơ bản.  
+- Có thể cải thiện mạnh bằng Bi-LSTM, CRF hoặc sử dụng embedding pretrained (FastText, GloVe).
+
+---
+
+## Khó khăn và giải pháp
+
+| Khó khăn | Nguyên nhân | Giải pháp |
+|---------|-------------|-----------|
+| Lỗi khi đọc file CoNLL-U | Có multiword token, metadata | Bỏ dòng #, bỏ token có dấu “-” hoặc dấu chấm số |
+| Padding sai => loss tăng | Không đồng bộ word_ids và tag_ids sau pad | Pad hai chuỗi cùng lúc trong collate_fn |
+| Lỗi pack_padded_sequence | Lengths không sắp xếp giảm dần | Thêm `enforce_sorted=False` |
+| Từ hiếm => dự đoán sai | Không nằm trong vocabulary | Dùng token `<UNK>` |
+| Accuracy cao nhưng dự đoán sai nhãn phức tạp | RNN hạn chế ngữ cảnh | Đề xuất nâng cấp BiLSTM hoặc thêm CRF |
+
+## Tài liệu tham khảo 
+
+1. **PyTorch Documentation – RNN, LSTM, GRU**  
+https://pytorch.org/docs/stable/nn.html  
+
+2. **Universal Dependencies – CoNLL-U Format**  
+https://universaldependencies.org/format.html  
+
+3. **Stanford NLP POS Tagging Notes**  
+https://web.stanford.edu/~jurafsky/slp3/  

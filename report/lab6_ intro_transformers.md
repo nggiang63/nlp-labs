@@ -4,6 +4,15 @@ Giang Nguyen Thi - 22001254
 
 2025-11-18
 
+---
+
+## Hướng dẫn chạy code 
+
+Toàn bộ code thực thi cho các mô hình được đặt tại:  
+`nlp-labs/notebook/lab6_intro_transformers.ipynb`
+
+---
+
 ## **Bài 1: Khôi phục Masked Token (Masked Language Modeling)**
 
 **Mục tiêu**
@@ -110,3 +119,36 @@ Mô hình sinh một đoạn văn dài, mạch lạc và liên quan đến NLP.
 2. Tại sao chúng ta cần sử dụng attention_mask khi thực hiện Mean Pooling?
 
 Nếu không loại bỏ padding, mean pooling sẽ tính trung bình luôn cả các vector [PAD] - những vector này không mang ý nghĩa ngữ nghĩa và có giá trị gần 0 => làm hỏng embedding.
+
+## **Khó khăn & Giải pháp**
+
+| Khó khăn | Nguyên nhân | Giải pháp |
+|---------|-------------|-----------|
+| Lỗi "pad token not found" khi dùng GPT-2 để sinh văn bản | GPT-2 không có token `<pad>` mặc định | Thêm `pad_token` = `eos_token` khi gọi pipeline |
+| Lỗi CUDA Out of Memory khi load BERT hoặc GPT-2 | GPU yếu, VRAM < 4GB | Chạy CPU hoặc dùng mô hình nhỏ hơn (distilbert-base-uncased, distilgpt2) |
+| Tốc độ load mô hình chậm | Model quá lớn hoặc mạng yếu | Dùng `local_files_only=True` sau khi đã cache hoặc tải qua HuggingFace CLI |
+| Sai embedding vì mean pooling không có attention mask | Padding ảnh hưởng tính trung bình | Nhân embedding với attention_mask trước khi tính mean |
+| Tokenizer trả về số lượng token quá dài  model reject | Một số tokenizer vượt max_length | Thêm `truncation=True` khi encode |
+| Output text-generation quá dài hoặc lặp từ | Lỗi lặp của GPT-style models | Tăng temperature, dùng top-k/top-p sampling |
+| Mismatch device (tensor ở CPU, model ở GPU) | `.to(device)` không đồng nhất | Luôn chuyển cả input và model sang cùng device |s
+
+---
+
+## **Tài liệu tham khảo**
+
+1. HuggingFace Transformers Documentation 
+   https://huggingface.co/docs/transformers/index  
+
+2. BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding 
+   Devlin et al., 2018  
+   https://arxiv.org/abs/1810.04805  
+
+3. Language Models are Unsupervised Multitask Learners (GPT-2)
+   Radford et al., 2019  
+   https://openai.com/research/better-language-models  
+
+4. HuggingFace Pipeline Tutorial**  
+   https://huggingface.co/docs/transformers/task_summary  
+
+5. Sentence Embedding with BERT (Mean Pooling Tutorial)
+   https://www.sbert.net/examples/applications/computing-embeddings/README.html
