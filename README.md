@@ -7,7 +7,7 @@
 - Lớp: K67A5 - Khoa học Dữ liệu  
 - Học phần: Xử lý ngôn ngữ tự nhiên và học sâu
 
----
+
 
 ## 2. Mục tiêu repository
 
@@ -18,7 +18,7 @@ Mục tiêu chính:
 - Mỗi Lab có báo cáo chi tiết, giúp người xem hiểu rõ cách làm, thí nghiệm và kết quả.  
 - Dễ dàng chạy lại, tái hiện các thực nghiệm (reproducible).  
 
----
+
 
 ## 3. Cấu trúc thư mục
 
@@ -53,7 +53,7 @@ nlp-labs/
 
 Dưới đây là tóm tắt nội dung chính từng Lab trong môn NLP:
 
----
+
 
 ### Lab 1 - Tokenizer cơ bản
 
@@ -62,7 +62,7 @@ Dưới đây là tóm tắt nội dung chính từng Lab trong môn NLP:
   - `RegexTokenizer` (sử dụng biểu thức chính quy để tách từ/chấm câu).
 - Quan sát ưu - nhược điểm của từng cách tokenization.
 
----
+
 
 ### Lab 2 - Biểu diễn văn bản bằng Bag-of-Words
 
@@ -71,7 +71,7 @@ Dưới đây là tóm tắt nội dung chính từng Lab trong môn NLP:
   - Xây dựng vocabulary, đếm tần suất xuất hiện từ.
 - Chuẩn bị đầu vào cho các mô hình học máy đơn giản.
 
----
+
 
 ### Lab 3 - Word Embedding (Word2Vec)
 
@@ -80,7 +80,7 @@ Dưới đây là tóm tắt nội dung chính từng Lab trong môn NLP:
   - So sánh các từ gần nhau trong không gian vector.
   - Minh họa khả năng bắt quan hệ ngữ nghĩa và ngữ pháp giữa các từ.
 
----
+
 
 ### Lab 4 - Text Classification
 
@@ -90,7 +90,7 @@ Dưới đây là tóm tắt nội dung chính từng Lab trong môn NLP:
 - Đánh giá mô hình qua các metric:
   - accuracy, precision, recall, F1-score.
 
----
+
 
 ### Lab 5 - RNNs, LSTMs, GRUs cho token classification
 
@@ -102,7 +102,7 @@ Dưới đây là tóm tắt nội dung chính từng Lab trong môn NLP:
   - Các bài toán token classification khác.
 - So sánh chất lượng giữa các kiến trúc (RNN thuần vs LSTM/GRU).
 
----
+
 
 ### Lab 6 - Introduction to Transformers
 
@@ -115,7 +115,7 @@ Dưới đây là tóm tắt nội dung chính từng Lab trong môn NLP:
   - Fine-tuning mô hình Transformer trên dataset nhỏ.
   - So sánh hiệu quả với mô hình ở Lab 4 và Lab 5.
 
----
+
 
 ## 5. Cách cài đặt và chạy
 
