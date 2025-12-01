@@ -49,75 +49,7 @@ nlp-labs/
 └── .gitignore            # Loại bỏ file không cần track 
 ```
 
-## 4. Nội dung các Lab
-
-Dưới đây là tóm tắt nội dung chính từng Lab trong môn NLP:
-
-
-
-### Lab 1 - Tokenizer cơ bản
-
-- Cài đặt và so sánh các bộ tách từ cơ bản:
-  - `SimpleTokenizer` (tách theo khoảng trắng, ký tự đơn giản).
-  - `RegexTokenizer` (sử dụng biểu thức chính quy để tách từ/chấm câu).
-- Quan sát ưu - nhược điểm của từng cách tokenization.
-
-
-
-### Lab 2 - Biểu diễn văn bản bằng Bag-of-Words
-
-- Cài đặt `CountVectorizer` để:
-  - Biểu diễn văn bản dưới dạng vector số (Bag-of-Words).
-  - Xây dựng vocabulary, đếm tần suất xuất hiện từ.
-- Chuẩn bị đầu vào cho các mô hình học máy đơn giản.
-
-
-
-### Lab 3 - Word Embedding (Word2Vec)
-
-- Biểu diễn từ dưới dạng dense vector (word embedding).
-- Huấn luyện hoặc sử dụng mô hình `Word2Vec`:
-  - So sánh các từ gần nhau trong không gian vector.
-  - Minh họa khả năng bắt quan hệ ngữ nghĩa và ngữ pháp giữa các từ.
-
-
-
-### Lab 4 - Text Classification
-
-- Bài toán phân loại văn bản sử dụng pipeline:
-  - Các bước tiền xử lý từ các Lab trước (tokenizer, BoW, TF-IDF hoặc embedding).
-  - Các mô hình học máy đơn giản (Logistic Regression, SVM, Naive Bayes).
-- Đánh giá mô hình qua các metric:
-  - accuracy, precision, recall, F1-score.
-
-
-
-### Lab 5 - RNNs, LSTMs, GRUs cho token classification
-
-- Sử dụng các kiến trúc tuần tự:
-  - RNN, LSTM, GRU.
-- Ứng dụng cho các bài toán:
-  - POS tagging (gán nhãn từ loại).
-  - NER (Named Entity Recognition - nhận dạng thực thể).
-  - Các bài toán token classification khác.
-- So sánh chất lượng giữa các kiến trúc (RNN thuần vs LSTM/GRU).
-
-
-
-### Lab 6 - Introduction to Transformers
-
-- Làm quen với các mô hình Transformer pretrained:
-  - Ví dụ: BERT, RoBERTa hoặc các mô hình tương tự.
-- Ứng dụng cho tác vụ NLP cơ bản:
-  - Phân loại văn bản.
-  - Token classification (POS/NER).
-- Thực hành:
-  - Fine-tuning mô hình Transformer trên dataset nhỏ.
-  - So sánh hiệu quả với mô hình ở Lab 4 và Lab 5.
-
-
-
-## 5. Cách cài đặt và chạy
+## 4. Cách cài đặt và chạy
 
 ### Cài đặt môi trường Python
 
